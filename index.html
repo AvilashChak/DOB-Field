@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>DOB Field</title>
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+	<script type="text/javascript" src="jquery.min.js"></script>
+
+	<script type="text/javascript">
+
+		jQuery(function($) {
+
+			const generateDobFields = function( field, $id, startYear = null, endYear = null ) {
+
+				let options = '';
+
+				switch (field) {
+
+					case 'day':
+
+						for ( let i = 1; i <= 31; i++ ) {
+							options += `<option value="${i}">${i}</option>`;
+						}
+
+						break;
+
+					case 'month':
+
+						for ( let i =1; i <=12; i++ ) {
+							options += `<option value="${i}">${i}</option>`;
+						}
+
+						break;
+
+					case 'year':
+
+						for ( let i = startYear; i <= endYear; i++ ) {
+							options += `<option value="${i}">${i}</option>`;
+						}
+
+						break;
+
+				}
+
+				$id.append(options);
+			};
+
+			$('#loadDob').on('click', function() {
+
+		
+
+				if ($(this).attr('data-state') == '1' )
+				    return;
+
+				($(this).attr('data-state', 1));
+
+
+
+				generateDobFields( 'day', $('#day') );
+				generateDobFields( 'month', $('#month') );
+				generateDobFields( 'year', $('#year'), 1980, 2021 );
+
+			});	
+
+		});
+		
+
+	</script>
+</head>
+<body>
+
+
+		<div class="container">
+			
+			<h2>DOB Field</h2>
+
+			<form class="form-inline">
+
+			<div class="form-group">
+
+				<button type="button" id="loadDob" data state = "0" class="form-control mr-4">Load DOB</button>
+
+				<select id="day" class="form-control mr-2">
+			      <option>DAY</option>
+			    </select>
+
+			    <select id="month" class="form-control mr-2">
+			      <option>MONTH</option>
+			    </select>
+
+			    <select id="year" class="form-control">
+			      <option>YEAR</option>
+			    </select>
+
+			</div>
+
+		</form>
+
+		</div>
+</body>
+</html>
